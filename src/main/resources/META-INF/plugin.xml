@@ -9,5 +9,7 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
+        <treeStructureProvider
+                implementation="com.github.xepozz.fs_info.FSTreeStructureProvider" />
     </extensions>
 </idea-plugin>
