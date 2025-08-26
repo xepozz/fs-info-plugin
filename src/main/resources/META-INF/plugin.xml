@@ -9,7 +9,46 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <treeStructureProvider
-                implementation="com.github.xepozz.fs_info.FSTreeStructureProvider" />
+        <treeStructureProvider implementation="com.github.xepozz.fs_info.FSTreeStructureProvider"/>
     </extensions>
+
+    <actions>
+        <group id="ProjectView.FileSystem" text="File System Info" popup="true">
+            <action id="ProjectView.FoldRootFiles.ToggleBytesAction"
+                    class="com.github.xepozz.fs_info.actions.ToggleBytesAction"
+                    text="Show Bytes"
+                    description="Show bytes descriptor">
+            </action>
+            <action id="ProjectView.FoldRootFiles.ToggleKBytesAction"
+                    class="com.github.xepozz.fs_info.actions.ToggleKBytesAction"
+                    text="Show KBytes"
+                    description="Show kilobytes descriptor">
+            </action>
+            <action id="ProjectView.FoldRootFiles.ToggleMBytesAction"
+                    class="com.github.xepozz.fs_info.actions.ToggleMBytesAction"
+                    text="Show MBytes"
+                    description="Show megabytes descriptor">
+            </action>
+            <action id="ProjectView.FoldRootFiles.ToggleGBytesAction"
+                    class="com.github.xepozz.fs_info.actions.ToggleGBytesAction"
+                    text="Show GBytes"
+                    description="Show gigabytes descriptor">
+            </action>
+            <action id="ProjectView.FoldRootFiles.ToggleLinesAction"
+                    class="com.github.xepozz.fs_info.actions.ToggleLinesAction"
+                    text="Show File Lines"
+                    description="Show file lines descriptor">
+            </action>
+            <action id="ProjectView.FoldRootFiles.ToggleDirectoryItemsAction"
+                    class="com.github.xepozz.fs_info.actions.ToggleDirectoryItemsAction"
+                    text="Show Directory Items Size"
+                    description="Show directory items descriptor">
+            </action>
+            <add-to-group
+                    group-id="ProjectView.ToolWindow.SecondaryActions"
+                    relative-to-action="ProjectView.ToolWindow.Sort.Actions"
+                    anchor="after"
+            />
+        </group>
+    </actions>
 </idea-plugin>
