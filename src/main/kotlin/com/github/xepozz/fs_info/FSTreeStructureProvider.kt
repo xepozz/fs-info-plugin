@@ -63,7 +63,7 @@ class FSTreeStructureProvider(private val project: Project) : TreeStructureProvi
                         }
 
                         if (settings.showLines) {
-                            node.value.fileDocument.lineCount.apply {
+                            node.value.viewProvider.document?.lineCount?.apply {
                                 if (this > 0) {
                                     add("$this lines")
                                 }
