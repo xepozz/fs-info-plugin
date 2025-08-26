@@ -1,4 +1,4 @@
-package com.github.xepozz.fsinfoplugin
+package com.github.xepozz.fs_info
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

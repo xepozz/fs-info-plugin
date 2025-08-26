@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# fs-info-plugin Changelog
+# FileSystem Info Changelog
 
 ## [Unreleased]
 ### Added
