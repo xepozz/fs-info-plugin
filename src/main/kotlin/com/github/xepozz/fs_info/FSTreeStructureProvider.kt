@@ -7,7 +7,7 @@ import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
-import org.jetbrains.annotations.Unmodifiable
+import java.text.DecimalFormat
 
 class FSTreeStructureProvider(private val project: Project) : TreeStructureProvider {
     private val settings by lazy { project.getService(FsInfoSettings::class.java) }
@@ -57,7 +57,7 @@ class FSTreeStructureProvider(private val project: Project) : TreeStructureProvi
                                 }
 
                                 val preciseSize = size / type.bytes.toDouble()
-                                add(String.format("%.1f%s", preciseSize, type.suffix))
+                                add(String.format("%s%s", DecimalFormat("#.#").format(preciseSize), type.suffix))
 
                             }
                         }

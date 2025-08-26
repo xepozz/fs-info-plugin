@@ -1,7 +1,6 @@
 package com.github.xepozz.fs_info
 
 import com.intellij.openapi.components.*
-import com.intellij.util.xmlb.annotations.OptionTag
 
 @Service(Service.Level.PROJECT)
 @State(name = "FsInfoSettings", storages = [Storage("fs_info.xml")])
