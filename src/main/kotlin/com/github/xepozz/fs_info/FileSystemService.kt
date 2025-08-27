@@ -9,9 +9,12 @@ import com.intellij.openapi.vfs.VirtualFile
 
 @Service(value = [Service.Level.PROJECT])
 class FileSystemService(val project: Project) {
-    var collector = FileSystemStructureCollector()
+    private var collector = FileSystemStructureCollector()
+    private val settings by lazy { project.getService(FsInfoSettings::class.java) }
 
     fun refresh() {
+        if (!settings.enabled) return
+
         val projectDirectory = project.guessProjectDir() ?: return
 
         collector.refresh(projectDirectory.toNioPath())

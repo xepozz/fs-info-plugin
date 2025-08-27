@@ -22,6 +22,7 @@ class FileNodeDecorator(val project: Project) : ProjectViewNodeDecorator {
         node: ProjectViewNode<*>,
         presentation: PresentationData
     ) {
+        if (!settings.enabled) return
         if (isNodeIgnored(node)) return
 
         val psiFile = node.value

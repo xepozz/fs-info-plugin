@@ -15,6 +15,11 @@
 
     <actions>
         <group id="ProjectView.FileSystem" text="File System Info" popup="true">
+            <action id="ProjectView.FoldRootFiles.ToggleEnabledAction"
+                    class="com.github.xepozz.fs_info.actions.ToggleEnabledAction"
+                    text="Enabled"
+                    description="Enables or disables printing the information">
+            </action>
             <action id="ProjectView.FoldRootFiles.ToggleBytesAction"
                     class="com.github.xepozz.fs_info.actions.ToggleBytesAction"
                     text="Show Bytes"
