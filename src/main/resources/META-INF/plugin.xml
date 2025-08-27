@@ -13,6 +13,14 @@
         <postStartupActivity implementation="com.github.xepozz.fs_info.StartupListener" order="first"/>
     </extensions>
 
+    <projectListeners>
+        <listener
+                activeInTestMode="false"
+                activeInHeadlessMode="false"
+                topic="com.intellij.openapi.vcs.FileStatusListener"
+                class="com.github.xepozz.fs_info.FileStatusListener"/>
+    </projectListeners>
+
     <actions>
         <group id="ProjectView.FileSystem" text="File System Info" popup="true">
             <action id="ProjectView.FoldRootFiles.ToggleEnabledAction"

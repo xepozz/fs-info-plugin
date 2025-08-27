@@ -3,7 +3,6 @@ package com.github.xepozz.fs_info
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
 class StartupListener : ProjectActivity {
@@ -13,10 +12,8 @@ class StartupListener : ProjectActivity {
 
         if (!settings.enabled) return
 
-        coroutineScope {
-            withContext(Dispatchers.IO) {
-                fileSystemService.refresh()
-            }
+        withContext(Dispatchers.IO) {
+            fileSystemService.refresh()
         }
     }
 }

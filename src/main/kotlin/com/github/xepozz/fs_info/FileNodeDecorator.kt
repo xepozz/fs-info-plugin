@@ -43,7 +43,7 @@ class FileNodeDecorator(val project: Project) : ProjectViewNodeDecorator {
             is PsiFileSystemItem -> decorateFilePresentation(presentation, fileNodeDescriptor)
 
             else -> {
-                println("unknown node: ${node.javaClass.name}")
+//                println("unknown node: ${node.javaClass.name}")
 
                 decorateFilePresentation(presentation, fileNodeDescriptor)
             }
@@ -121,4 +121,3 @@ class FileNodeDecorator(val project: Project) : ProjectViewNodeDecorator {
         else -> FileSizeType.GIGABYTES
     }
 }
-
