@@ -1,4 +1,4 @@
-package com.github.xepozz.fs_info
+package com.github.xepozz.fs_info.files
 
 import com.intellij.util.io.IOUtil
 
