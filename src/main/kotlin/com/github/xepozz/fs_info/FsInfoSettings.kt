@@ -10,7 +10,8 @@ class FsInfoSettings : BaseState(), PersistentStateComponent<FsInfoSettings> {
     var showMBytes by property(true)
     var showGBytes by property(true)
     var showLines by property(true)
-    var showDirectoryItems by property(true)
+    var showDirectoryItemsAmount by property(true)
+    var showDirectorySize by property(true)
 
     override fun getState() = this
     override fun loadState(state: FsInfoSettings) = copyFrom(state)

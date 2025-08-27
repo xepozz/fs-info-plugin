@@ -11,7 +11,6 @@ import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vcs.FileStatus
 import com.intellij.psi.PsiFile
-import com.intellij.util.io.IOUtil
 
 class FSTreeStructureProvider(private val project: Project) : TreeStructureProvider {
     private val settings by lazy { project.getService(FsInfoSettings::class.java) }
@@ -63,6 +62,8 @@ class FSTreeStructureProvider(private val project: Project) : TreeStructureProvi
                 val isIgnored = node.fileStatus == FileStatus.IGNORED &&
                         node.parent?.fileStatus == FileStatus.IGNORED
 
+                if (isIgnored) return
+
                 val size = sizeAccumulator.size
                 val fileSizeType = getFileSizeType(size)
 
@@ -71,19 +72,16 @@ class FSTreeStructureProvider(private val project: Project) : TreeStructureProvi
                 buildList {
                     presentation.locationString?.apply { add(this) }
 
-                    if (size > 0u && shouldShowSize(fileSizeType)) {
+                    if (size > 0u && settings.showDirectorySize && shouldShowSize(fileSizeType)) {
                         add(StringUtil.formatFileSize(size.toLong()))
                     }
 
-                    if (!isIgnored && settings.showDirectoryItems) {
-                        node.children.size.apply {
-                            if (this > 0) {
-                                add("$this items")
-                            }
-                        }
+                    val directoryItems = node.children.size
+                    if (directoryItems > 0 && settings.showDirectoryItemsAmount) {
+                        add("$directoryItems items")
                     }
                 }.apply {
-                    if (isNotEmpty() && !isIgnored) {
+                    if (isNotEmpty()) {
                         val joinToString = joinToString(" | ")
                         presentation.locationString = joinToString
                         node.update()
@@ -97,25 +95,33 @@ class FSTreeStructureProvider(private val project: Project) : TreeStructureProvi
 
                 if (!psiFile.isPhysical) return
 
+                val fileSize = getFileSize(psiFile)
+                sizeAccumulator.size += fileSize
+
+                val isIgnored = node.fileStatus == FileStatus.IGNORED &&
+                        node.parent?.fileStatus == FileStatus.IGNORED
+
+                if (isIgnored) return
+
+                if (projectRootManager.fileIndex.isExcluded(psiFile.virtualFile)) {
+//                    println("file ${psiFile.virtualFile} is excluded")
+                    return
+                }
                 buildList {
                     presentation.locationString?.apply { add(this) }
-                    getFileSize(psiFile).apply {
-                        if (this > 0u) {
+                    if (fileSize > 0u) {
 //                            println("file2: ${node.value.name} size: ${this}")
-                            sizeAccumulator.size += this
 
-                            val size = this
-                            val fileSizeType = getFileSizeType(size)
+                        val fileSizeType = getFileSizeType(fileSize)
 
-                            if (shouldShowSize(fileSizeType)) {
-                                add(StringUtil.formatFileSize(size.toLong()))
-                            }
+                        if (shouldShowSize(fileSizeType)) {
+                            add(StringUtil.formatFileSize(fileSize.toLong()))
                         }
                     }
 
                     if (settings.showLines) {
                         val lineCount = try {
-                            node.value.viewProvider.document?.lineCount
+                            psiFile.viewProvider.document?.lineCount
                         } catch (_: java.lang.IllegalStateException) {
                             0
                         }
@@ -125,9 +131,6 @@ class FSTreeStructureProvider(private val project: Project) : TreeStructureProvi
                         }
                     }
                 }.apply {
-                    if (projectRootManager.fileIndex.isExcluded(psiFile.virtualFile)) {
-                        return@apply
-                    }
                     if (isNotEmpty()) {
                         presentation.locationString = joinToString(" | ")
                         node.update()
@@ -139,13 +142,6 @@ class FSTreeStructureProvider(private val project: Project) : TreeStructureProvi
         }
     }
 
-    private fun shouldShowSize(type: FileSizeType) = when (type) {
-        FileSizeType.BYTES -> settings.showBytes
-        FileSizeType.KILOBYTES -> settings.showKBytes
-        FileSizeType.MEGABYTES -> settings.showMBytes
-        FileSizeType.GIGABYTES -> settings.showGBytes
-    }
-
     private fun getFileSize(psiFile: PsiFile): ULong {
         return try {
             psiFile.virtualFile.length
@@ -154,19 +150,19 @@ class FSTreeStructureProvider(private val project: Project) : TreeStructureProvi
         }.toULong()
     }
 
+    private fun shouldShowSize(type: FileSizeType) = when (type) {
+        FileSizeType.BYTES -> settings.showBytes
+        FileSizeType.KILOBYTES -> settings.showKBytes
+        FileSizeType.MEGABYTES -> settings.showMBytes
+        FileSizeType.GIGABYTES -> settings.showGBytes
+    }
+
     private fun getFileSizeType(size: ULong): FileSizeType = when {
         size < FileSizeType.KILOBYTES.bytes -> FileSizeType.BYTES
         size < FileSizeType.MEGABYTES.bytes -> FileSizeType.KILOBYTES
         size < FileSizeType.GIGABYTES.bytes -> FileSizeType.MEGABYTES
         else -> FileSizeType.GIGABYTES
     }
-}
-
-enum class FileSizeType(val bytes: ULong) {
-    BYTES(1.toULong()),
-    KILOBYTES(IOUtil.KiB.toULong()),
-    MEGABYTES(IOUtil.MiB.toULong()),
-    GIGABYTES(IOUtil.GiB.toULong()),
 }
 
 private data class SizeAccumulator(var size: ULong)

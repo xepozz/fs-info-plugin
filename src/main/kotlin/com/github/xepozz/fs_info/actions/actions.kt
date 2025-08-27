@@ -35,6 +35,12 @@ class ToggleLinesAction : DumbAware, ToggleOptionAction({
 
 class ToggleDirectoryItemsAction : DumbAware, ToggleOptionAction({
     object : AbstractToggleAction(it) {
-        override val option = settings::showDirectoryItems
+        override val option = settings::showDirectoryItemsAmount
+    }
+})
+
+class ToggleDirectorySizeAction : DumbAware, ToggleOptionAction({
+    object : AbstractToggleAction(it) {
+        override val option = settings::showDirectorySize
     }
 })

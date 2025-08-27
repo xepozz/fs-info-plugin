@@ -44,6 +44,11 @@
                     text="Show Directory Items Size"
                     description="Show directory items descriptor">
             </action>
+            <action id="ProjectView.FoldRootFiles.ToggleDirectorySizeAction"
+                    class="com.github.xepozz.fs_info.actions.ToggleDirectorySizeAction"
+                    text="Show Directory Size"
+                    description="Show directory items descriptor">
+            </action>
             <add-to-group
                     group-id="ProjectView.ToolWindow.SecondaryActions"
                     relative-to-action="ProjectView.ToolWindow.Sort.Actions"
