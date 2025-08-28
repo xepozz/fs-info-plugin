@@ -10,8 +10,8 @@ data class FileNodeDescriptor(
     val children: MutableMap<String, FileNodeDescriptor> = mutableMapOf(),
     var parent: FileNodeDescriptor? = null
 ) {
-    val childrenSize
-        get() = children.size
+    val childrenSize: Int
+        get() = children.values.sumOf { if (it.isDirectory) it.childrenSize else 1 }
 
     val fileCount: Int
         get() = if (isDirectory) {
