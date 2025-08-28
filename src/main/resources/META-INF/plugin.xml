@@ -23,42 +23,42 @@
 
     <actions>
         <group id="ProjectView.FileSystem" text="File System Info" popup="true">
-            <action id="ProjectView.FoldRootFiles.ToggleEnabledAction"
+            <action id="ProjectView.FileSystem.ToggleEnabledAction"
                     class="com.github.xepozz.fs_info.actions.ToggleEnabledAction"
                     text="Enabled"
                     description="Enables or disables printing the information">
             </action>
-            <action id="ProjectView.FoldRootFiles.ToggleBytesAction"
+            <action id="ProjectView.FileSystem.ToggleBytesAction"
                     class="com.github.xepozz.fs_info.actions.ToggleBytesAction"
                     text="Show Bytes"
                     description="Show bytes descriptor">
             </action>
-            <action id="ProjectView.FoldRootFiles.ToggleKBytesAction"
+            <action id="ProjectView.FileSystem.ToggleKBytesAction"
                     class="com.github.xepozz.fs_info.actions.ToggleKBytesAction"
                     text="Show KBytes"
                     description="Show kilobytes descriptor">
             </action>
-            <action id="ProjectView.FoldRootFiles.ToggleMBytesAction"
+            <action id="ProjectView.FileSystem.ToggleMBytesAction"
                     class="com.github.xepozz.fs_info.actions.ToggleMBytesAction"
                     text="Show MBytes"
                     description="Show megabytes descriptor">
             </action>
-            <action id="ProjectView.FoldRootFiles.ToggleGBytesAction"
+            <action id="ProjectView.FileSystem.ToggleGBytesAction"
                     class="com.github.xepozz.fs_info.actions.ToggleGBytesAction"
                     text="Show GBytes"
                     description="Show gigabytes descriptor">
             </action>
-            <action id="ProjectView.FoldRootFiles.ToggleLinesAction"
+            <action id="ProjectView.FileSystem.ToggleLinesAction"
                     class="com.github.xepozz.fs_info.actions.ToggleLinesAction"
                     text="Show File Lines"
                     description="Show file lines descriptor">
             </action>
-            <action id="ProjectView.FoldRootFiles.ToggleDirectoryItemsAction"
+            <action id="ProjectView.FileSystem.ToggleDirectoryItemsAction"
                     class="com.github.xepozz.fs_info.actions.ToggleDirectoryItemsAction"
                     text="Show Directory Items Size"
                     description="Show directory items descriptor">
             </action>
-            <action id="ProjectView.FoldRootFiles.ToggleDirectorySizeAction"
+            <action id="ProjectView.FileSystem.ToggleDirectorySizeAction"
                     class="com.github.xepozz.fs_info.actions.ToggleDirectorySizeAction"
                     text="Show Directory Size"
                     description="Show directory items descriptor">
