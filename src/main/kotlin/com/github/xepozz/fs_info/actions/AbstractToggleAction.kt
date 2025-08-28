@@ -4,13 +4,12 @@ import com.github.xepozz.fs_info.FsInfoSettings
 import com.intellij.ide.projectView.ProjectView
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.ToggleOptionAction
-import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import kotlin.reflect.KMutableProperty0
 
 abstract class AbstractToggleAction(action: AnActionEvent) : ToggleOptionAction.Option {
     val project: Project = action.project!!
-    val settings = project.service<FsInfoSettings>()
+    val settings: FsInfoSettings = project.getService(FsInfoSettings::class.java)
 
     override fun isEnabled() = settings.enabled
 
