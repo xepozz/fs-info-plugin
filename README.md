@@ -6,7 +6,7 @@
 
 <!-- Plugin description -->
 
-[GitHub](https://github.com/xepozz/caddy-plugin) | [Telegram](https://t.me/jb_plugins/100) | [Donation](https://github.com/xepozz/xepozz?tab=readme-ov-file#become-a-sponsor)
+[GitHub](https://github.com/j-plugins/fs-info-plugin) | [Telegram](https://t.me/jb_plugins/100) | [Donation](https://github.com/xepozz/xepozz?tab=readme-ov-file#become-a-sponsor)
 
 ## File System Info
 
